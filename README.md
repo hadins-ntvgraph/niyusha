@@ -69,12 +69,12 @@ Type `@` + `Tab` to reference files, attach images with `/img`, and run `/help` 
 
 ## Built-in tools (and yes, there are a lot)
 
-Niyusha comes with **24 tools** out of the box — no plugins to install:
+Niyusha comes with **28 tools** out of the box — no plugins to install:
 
 - **Files** — `read_file` · `write_file` · `edit_file` · `rename_file` · `delete_file` · `list_directory` · `create_directory`
 - **Search & explore** — `glob_files` · `grep_search` · `workspace_tree`
 - **Execute** — `run_command` (real shell, permissioned) · `run_code`
-- **Research** — `web_search` (works with no extra key)
+- **Research** — `web_search` (works with no extra key), `browser_open` · `browser_content` (fetch a URL, no extra key) — browser first, then `web_search` fallback
 - **Plan & remember** — `set_todos` · `resolve_issue` · `read_note` / `write_note` / `clear_note`
 - **Extend** — `use_skill` · `save_skill` (distill a session into a reusable skill behind a diff review) · `task` (delegate to a **subagent**: `explore` read-only / `build` that stages edits for review) · `mcp_list` / `mcp_call` (connect any **MCP server**)
 
@@ -94,10 +94,11 @@ Start a brand-new site in Niyusha's own look — one command:
 
 ## Conditional skills (khas Niyusha)
 
-Niyusha ships **25 built-in specialist skills** — web, frontend, backend,
+Niyusha ships **27 built-in specialist skills** — web, frontend, backend,
 database, debugging, refactor, test, security, deploy, code-review, mobile,
 packaging, ml-data, automation, performance, algorithm, ai-agent, ui-ux, devops,
-data-eng, documentation, game, embedded, research, and **simulation**.
+data-eng, documentation, game, embedded, research, simulation, image-ocr, and
+image-embed.
 
 A compact index (`id — deskripsi`) is shown to the AI, which then picks and loads
 only the relevant skill(s) via `use_skill` — **model-driven**, tanpa pencocokan
@@ -229,3 +230,36 @@ This one is about **seeing more and spending less**.
 - Large files are skipped with an explicit **partial undo** notice, and restoring never deletes files Niyusha didn't create.
 - Undo history is isolated per workspace — switching projects can no longer erase another project's snapshots.
 - `/undo` and `/redo` also update the agent's context, so it never assumes a rolled-back edit is still live.
+
+## What's new in v0.3.4
+
+This one is about **deciding less, verifying more**, and keeping context cheap.
+
+- Package size: `202.8 kB` (unpacked `683.3 kB`, 81 file) — `niyusha-0.3.4.tgz`.
+
+**Cognitive runtime**
+- The agent now runs on an explicit UNDERSTAND -> PLAN -> ACT -> VERIFY -> DECIDE loop instead of jumping straight to action.
+- **Verify gate**: after any mutating tool, the agent must verify (read-back / diff / test) before claiming done.
+
+**Context that stays cheap**
+- Compaction is now aggressive and operational: keeps the *decision* memory (goal, key choices, failures, next steps) rather than raw history.
+- Safe-point queue injection lets a queued user turn be added mid-run without waiting for the full run to finish.
+
+**AI browser**
+- Added `browser_open` + `browser_content` tools (fetch + HTML strip, purpose-built for the agent).
+- Web fallback: if `web_search` is unavailable/fails/limited, the agent uses `browser_open` + `browser_content` or its own knowledge.
+
+## What's new in v0.3.5
+
+This one is about **a cleaner zen mode and stronger media support**.
+
+- Package size: `212.1 kB` (unpacked `712.4 kB`, 87 files) — `niyusha-0.3.5.tgz`.
+
+**Zen mode polish**
+- Cleaner, distraction-free zen mode (`/zen` or `Ctrl+Z`): stripped chrome so only you and the work remain.
+
+**Image support**
+- Added `image_ocr` (Tesseract-backed OCR) and `image_embed` (hash-to-vector embedding) tools plus `image-ocr` / `image-embed` skills, so the agent can read and vectorize attached images.
+
+**Browser content**
+- Improved `browser_content`: link extraction now runs reliably from the fetched HTML (file-based parser, no SSL/Python fetch dependency), surfacing page links even when the network blocks Python's fetch.
