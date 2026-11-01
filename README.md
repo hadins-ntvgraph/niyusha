@@ -216,18 +216,17 @@ All state is local, in `~/.niyusha/`:
 
 ### Compaction (DIS-URICH default)
 
-Context compaction menggunakan DIS-URICH sebagai default untuk optimasi token
-dan preservasi konteks yang lebih baik. Mode `legacy` tetap tersedia via
-`/compact mode legacy` untuk backward compatibility. Set `compactionMode`
-di `~/.niyusha/config.json` ke `legacy`, `shadow`, `safe`, `experimental`,
-atau `urich` untuk memilih mode. Gunakan `off` sebagai kill switch. Archive
-terisolasi per workspace dan sesi, ditulis secara atomik, dan compaction
-dibatalkan jika archive gagal. Jalankan `node scripts/test-compaction.js`
-untuk memverifikasi fondasi mode ini. Saat berjalan di TUI, gunakan
-`/compact mode <mode>`, `/compact auto on|off`, `/compact stats`, dan
-`/compact rollback` untuk mengubah mode, menguji pemicu otomatis,
-melihat telemetry before/after, atau memulihkan checkpoint konteks terakhir.
-Auto-compaction default aktif.
+Context compaction uses DIS-URICH by default for token optimization and better
+context preservation. The `legacy` mode remains available via
+`/compact mode legacy` for backward compatibility. Set `compactionMode`
+in `~/.niyusha/config.json` to `legacy`, `shadow`, `safe`, `experimental`,
+or `urich` to select a mode. Use `off` as a kill switch. Archive is isolated
+per workspace and session, written atomically, and compaction is aborted if
+the archive fails. Run `node scripts/test-compaction.js` to verify this mode.
+When running in TUI, use `/compact mode <mode>`, `/compact auto on|off`,
+`/compact stats`, and `/compact rollback` to change mode, test automatic
+triggers, view before/after telemetry, or restore the last context checkpoint.
+Auto-compaction is enabled by default.
 
 ## Setup & Installation
 
