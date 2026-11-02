@@ -1,7 +1,7 @@
 # Niyusha
 
 **A featherweight AI coding agent that lives in your terminal.**
-Staged edits with diff review · a permissioned real shell · web search · autonomous mode · sessions · subagents · MCP — in **~670 KB unpacked (~200 KB download) with zero runtime dependencies**.
+Staged edits with diff review · a permissioned real shell · web search · autonomous mode · sessions · subagents · MCP — in **~857 KB unpacked (~254 KB download) with zero runtime dependencies**.
 
 [![npm version](https://img.shields.io/npm/v/niyusha.svg)](https://www.npmjs.com/package/niyusha)
 [![license](https://img.shields.io/npm/l/niyusha.svg)](https://www.npmjs.com/package/niyusha)
@@ -17,6 +17,19 @@ niyusha -v                # confirm the version
 ```
 
 No build step, no daemon, no config files to write — it starts in milliseconds.
+
+**Windows PowerShell:** If PowerShell blocks `npm.ps1` because script execution
+is disabled, use the Windows command shims instead; there is no need to change
+your execution policy:
+
+```powershell
+npm.cmd i -g niyusha
+niyusha.cmd
+```
+
+Use `npm.cmd` for updates as well, for example `npm.cmd i -g niyusha@latest`.
+
+Curious what else we're building? See [NTVGraph projects in development](#what-ntvgraph-is-building) at the bottom of this README.
 
 ---
 
@@ -87,7 +100,7 @@ installation. Scanned PDFs and legacy `.doc`/`.xls` files are not supported by
 this reader. The `document-reading` skill supplies format guidance only when
 relevant, keeping its detailed instructions out of the base prompt.
 
-## Signature kits (khas Niyusha)
+## Niyusha Signature Kits
 
 Start a brand-new site in Niyusha's own look — one command:
 
@@ -101,7 +114,7 @@ Start a brand-new site in Niyusha's own look — one command:
 - Prefer a bare start? Just say it — the kit is a default, never a lock-in.
 - Optional, off by default: `/credit on` adds a small "Made with NTVGraph × Niyusha" footer.
 
-## Conditional skills (khas Niyusha)
+## Conditional Skills
 
 Niyusha ships **28 built-in specialist skills** — web, frontend, backend,
 database, debugging, refactor, test, security, deploy, code-review, mobile,
@@ -109,14 +122,14 @@ packaging, ml-data, automation, performance, algorithm, ai-agent, ui-ux, devops,
 data-eng, documentation, game, embedded, research, simulation, image-ocr,
 image-embed, and document-reading.
 
-A compact index (`id — deskripsi`) is shown to the AI, which then picks and loads
-only the relevant skill(s) via `use_skill` — **model-driven**, tanpa pencocokan
-kata kunci yang rapuh.
+A compact index (`id — description`) is shown to the AI, which then picks and loads
+only the relevant skill(s) via `use_skill` — **model-driven**, without brittle
+keyword matching.
 
-- **Model decides** — AI membaca index lalu memuat skill yang cocok sebelum bekerja (semantik, bahasa apa pun). `/skill auto off` menyembunyikan index.
-- **Explicit** — `use_skill '<id>'` (AI) atau `/skill use <id>` (kamu); `use_skill` tanpa nama menampilkan katalog.
-- **Control & transparency** — `/skill ls` (daftar + status index) · `/skill auto on|off` · `/skill off <id>` / `/skill on <id>` · `/skill log` (apa yang dimuat, ~token).
-- **Extensible** — cukup buat folder `bin/skills/<id>/` berisi `skill.json` (metadata: description, priority, token_budget) + `rules.md`; tanpa ubah kode.
+- **Model decides** — The AI reads the index and loads the relevant skill before working, based on meaning in any language. `/skill auto off` hides the index.
+- **Explicit** — Use `use_skill '<id>'` (AI) or `/skill use <id>` (you); `use_skill` without an ID lists the catalog.
+- **Control & transparency** — `/skill ls` (list + index status) · `/skill auto on|off` · `/skill off <id>` / `/skill on <id>` · `/skill log` (loaded skills and approximate tokens).
+- **Extensible** — Add a `bin/skills/<id>/` folder with `skill.json` (metadata: description, priority, token_budget) and `rules.md`; no code changes required.
 
 ### Simulation: app, software & browser behavior
 `bin/sim.js` is a small **zero-dependency** behavioral harness — **not just for
@@ -185,7 +198,7 @@ See `/help` for the full list.
 - Export/import sessions as portable JSON, even **across different projects**.
 - Talks like you do: it replies in **your language**, whatever that is.
 
-## Context Intelligence (DIS-URICH) 🧠
+## Context Intelligence (DIS-URICH)
 
 **DIS-URICH** (Dynamic Information Structuring – Unified Representation for Intelligent 
 Context Handling) is Niyusha's context-management engine. It combines deterministic local 
@@ -195,7 +208,7 @@ Unlike traditional compaction that simply summarizes and truncates history, DIS-
 
 - **Semantic Atomization** — Breaks conversations into structured information units (atoms) with metadata, relationships, and provenance
 - **Two-Tier Memory** — Maintains both compressed active memory and full original archive for fallback retrieval
-- **State Ledger** — Tracks goal changes and explicitly scoped decisions (for example, `Keputusan [api]: Pertahankan endpoint lama`); newer decisions supersede older ones only within the same scope
+- **State Ledger** — Tracks goal changes and explicitly scoped decisions (for example, `Decision [api]: Keep the legacy endpoint`); newer decisions supersede older ones only within the same scope
 - **Temporal & Conflict Resolution** — Marks supported decision history as active or superseded; unscoped prose is not silently treated as a replacement
 - **Retrieval Before Assumption** — Ranks active memory alongside archived facts, including when active memory already has partial matches
 - **Coding Context Integration** — Extracts file/function/class references, task state, and design decisions; relationship analysis remains heuristic
@@ -223,42 +236,13 @@ in `~/.niyusha/config.json` to `legacy`, `shadow`, `safe`, `experimental`,
 or `urich` to select a mode. Use `off` as a kill switch. Archive is isolated
 per workspace and session, written atomically, and compaction is aborted if
 the archive fails. Run `node scripts/test-compaction.js` to verify this mode.
+The active summary is hard-bounded by `contextEngineMemoryChars`; repeated
+numbered progress is collapsed, while the original archive remains available
+for retrieval of historical details.
 When running in TUI, use `/compact mode <mode>`, `/compact auto on|off`,
 `/compact stats`, and `/compact rollback` to change mode, test automatic
 triggers, view before/after telemetry, or restore the last context checkpoint.
 Auto-compaction is enabled by default.
-
-## Setup & Installation
-
-### Prerequisites
-- Node.js >= 18
-- npm or yarn
-- (Optional) Chrome/Edge for web simulation
-- (Optional) Android SDK for ADB testing
-
-### Installation
-```bash
-# Clone repository
-git clone https://github.com/hadins-ntvgraph/niyusha.git
-cd niyusha/tui
-
-# Install dependencies (zero runtime deps, only dev deps)
-npm install
-
-# Run from source
-node bin/niyusha.js
-
-# Or install globally
-npm link
-niyusha
-```
-
-### First Run
-1. Run `niyusha` to start the TUI
-2. Configure your LLM provider: `/set provider openrouter`
-3. Set your API key: `/set key <your-api-key>`
-4. Choose a model: `/set model openai/gpt-4o-mini`
-5. Start coding!
 
 ## Configuration Reference
 
@@ -518,7 +502,7 @@ This update makes approvals clearer and keeps the focused chat mode easy to find
 - When Tesseract is missing, `image_ocr` reports the dependency issue and gives an OS-appropriate installation command. Missing English language data is identified separately with remediation guidance.
 - Niyusha must ask for permission before running an install command, verify the installation, and then retry OCR. It does not install dependencies silently.
 - `image_embed` stores a timestamped vector node locally under `~/.niyusha/image-vectors/` and returns a compact node ID instead of the full vector.
-- The current `sha256-bytehash-v1` representation is a deterministic byte fingerprintâ€”not a semantic or visual-similarity embedding.
+- The current `sha256-bytehash-v1` representation is a deterministic byte fingerprint—not a semantic or visual-similarity embedding.
 - Use `image_vector_read` to retrieve numeric values only when needed, in chunks of up to 256 dimensions. This keeps routine tool output and conversation context small.
 
 **Document reading**
@@ -531,8 +515,50 @@ This update makes approvals clearer and keeps the focused chat mode easy to find
 
 **Context Intelligence (DIS-URICH)**
 - **DIS-URICH** (Dynamic Information Structuring – Unified Representation for Intelligent Context Handling) is now the **default compaction mode**, replacing legacy compaction.
-- Provides 65-76% token savings through semantic atomization and two-tier retrieval
+- Uses semantic atomization and two-tier retrieval; token savings vary by task, model, and provider
 - Maintains structured context with temporal resolution, conflict resolution, and relationship tracking
 - Enables per-turn retrieval injection for better context awareness
 - Full documentation: `DIS-URICH.md` and `biaya_urich.md` (cost-benefit analysis)
 - Legacy mode remains available via `/compact mode legacy`
+
+## What's new in v0.3.7
+
+This update makes DIS-URICH compaction more predictable while preserving access
+to historical context.
+
+**Bounded, less noisy memory**
+- The active summary now strictly respects `contextEngineMemoryChars`; protected
+  atoms can no longer make it exceed the configured character budget.
+- Repeated numbered progress updates are collapsed in active memory instead of
+  competing with goals, decisions, failures, and next steps. The original
+  transcript remains in the archive.
+- Automatic budget growth was removed, so a failed completeness check cannot
+  silently expand the summary to several times its configured size.
+
+**Historical context remains retrievable**
+- Replacement relations such as “React replaced by Vue” remain active relation
+  facts rather than being incorrectly marked as superseded.
+- Retrieval keeps the replacement relation and its historical source fact
+  together, including when those facts must be loaded from the archive.
+- The same context-engine changes are applied to both the TUI and IDE builds.
+
+**Live coding check**
+- In one live pagination coding task, Legacy and URich implementations both
+  passed all 6 executable behavior checks.
+- Including compaction and code generation, URich used 8,954 provider-reported
+  tokens versus 14,507 for Legacy (38.3% fewer in this run). This is a
+  single-task result, not a general quality or savings guarantee.
+
+## What NTVGraph Is Building
+
+Alongside Niyusha TUI, NTVGraph is developing a broader set of tools and
+experiments. These projects are in progress and are not all released yet:
+
+- **NTVGraph × Niyusha IDE** — an AI-assisted coding environment.
+- **NTVGraph × Niyusha Humanoid** — 2D and 3D humanoid projects.
+- **NTVGraph Lightrei** — lossless compression research.
+- **NTVGraph LightHope** — lossy compression research.
+- **Android projects** — NTVGraph × Niyusha, NTVGraph × Games, NTVGraph × Python, NTVGraph × IPTV, NTVGraph x Browser, and more.
+
+We hope to share more as these projects get closer to release. This roadmap is
+for information only; availability and release timing may change.
