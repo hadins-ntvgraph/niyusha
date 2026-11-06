@@ -1,7 +1,7 @@
 # Niyusha
 
 **A featherweight AI coding agent that lives in your terminal.**
-Staged edits with diff review · a permissioned real shell · web search · autonomous mode · sessions · subagents · MCP — in **~882 KB unpacked (~261 KB download) with zero runtime dependencies**.
+Staged edits with diff review · a permissioned real shell · web search · autonomous mode · sessions · subagents · MCP — in **~961 KB unpacked (~280 KB download) with zero runtime dependencies**.
 
 [![npm version](https://img.shields.io/npm/v/niyusha.svg)](https://www.npmjs.com/package/niyusha)
 [![license](https://img.shields.io/npm/l/niyusha.svg)](https://www.npmjs.com/package/niyusha)
@@ -28,6 +28,8 @@ niyusha.cmd
 ```
 
 Use `npm.cmd` for updates as well, for example `npm.cmd i -g niyusha@latest`.
+
+**New in v0.3.9:** [adaptive compaction, overflow recovery, live progress, and DIS-URICH hardening](#whats-new-in-v039)
 
 **New in v0.3.8:** [context transparency, compaction surfacing, timestamps & tone markers →](#whats-new-in-v038)
 
@@ -84,6 +86,32 @@ search for the latest React release
 ```
 
 Type `@` + `Tab` to reference files, attach images with `/img`, and run `/help` anytime.
+
+## Context Intelligence (DIS-URICH)
+
+**DIS-URICH** (Dynamic Information Structuring – Unified Representation for Intelligent
+Context Handling) is Niyusha's context-management engine and its key
+differentiator. It combines deterministic local memory handling with the
+configured model; it does not replace the model's reasoning.
+
+Unlike traditional compaction that simply summarizes and truncates history, DIS-URICH:
+
+- **Semantic Atomization** — Breaks conversations into structured information units (atoms) with metadata, relationships, and provenance
+- **Two-Tier Memory** — Maintains both compressed active memory and full original archive for fallback retrieval
+- **State Ledger** — Tracks goal changes and explicitly scoped decisions (for example, `Decision [api]: Keep the legacy endpoint`); newer decisions supersede older ones only within the same scope
+- **Temporal & Conflict Resolution** — Marks supported decision history as active or superseded; unscoped prose is not silently treated as a replacement
+- **Retrieval Before Assumption** — Ranks active memory alongside archived facts, including when active memory already has partial matches
+- **Coding Context Integration** — Extracts file/function/class references, task state, and design decisions; relationship analysis remains heuristic
+- **Compact Surfacing** — Preserves message order (`#n`) and original timestamps (`[t:HH:MM]`), plus derived tone markers, with minimal token overhead
+
+Early results are promising: in one live coding task URich used 38.3% fewer
+provider-reported tokens than Legacy (8,954 vs 14,507), and offline quality
+checks retained all critical facts. Results still vary by task, model, and
+provider, and broader coverage is being tested — but the direction is clear.
+DIS-URICH is actively developed; expect further refinements and new features.
+
+Default compaction mode is now `urich`. Use `/compact mode legacy` to revert to traditional compaction.
+
 
 ## Built-in tools (and yes, there are a lot)
 
@@ -202,31 +230,6 @@ See `/help` for the full list.
 - Export/import sessions as portable JSON, even **across different projects**.
 - Talks like you do: it replies in **your language**, whatever that is.
 
-## Context Intelligence (DIS-URICH)
-
-**DIS-URICH** (Dynamic Information Structuring – Unified Representation for Intelligent
-Context Handling) is Niyusha's context-management engine and its key
-differentiator. It combines deterministic local memory handling with the
-configured model; it does not replace the model's reasoning.
-
-Unlike traditional compaction that simply summarizes and truncates history, DIS-URICH:
-
-- **Semantic Atomization** — Breaks conversations into structured information units (atoms) with metadata, relationships, and provenance
-- **Two-Tier Memory** — Maintains both compressed active memory and full original archive for fallback retrieval
-- **State Ledger** — Tracks goal changes and explicitly scoped decisions (for example, `Decision [api]: Keep the legacy endpoint`); newer decisions supersede older ones only within the same scope
-- **Temporal & Conflict Resolution** — Marks supported decision history as active or superseded; unscoped prose is not silently treated as a replacement
-- **Retrieval Before Assumption** — Ranks active memory alongside archived facts, including when active memory already has partial matches
-- **Coding Context Integration** — Extracts file/function/class references, task state, and design decisions; relationship analysis remains heuristic
-- **Compact Surfacing** — Preserves message order (`#n`) and original timestamps (`[t:HH:MM]`), plus derived tone markers, with minimal token overhead
-
-Early results are promising: in one live coding task URich used 38.3% fewer
-provider-reported tokens than Legacy (8,954 vs 14,507), and offline quality
-checks retained all critical facts. Results still vary by task, model, and
-provider, and broader coverage is being tested — but the direction is clear.
-DIS-URICH is actively developed; expect further refinements and new features.
-
-Default compaction mode is now `urich`. Use `/compact mode legacy` to revert to traditional compaction.
-
 ## Configuration & storage
 
 All state is local, in `~/.niyusha/`:
@@ -250,9 +253,18 @@ The active summary is hard-bounded by `contextEngineMemoryChars`; repeated
 numbered progress is collapsed, while the original archive remains available
 for retrieval of historical details.
 When running in TUI, use `/compact mode <mode>`, `/compact auto on|off`,
-`/compact stats`, and `/compact rollback` to change mode, test automatic
-triggers, view before/after telemetry, or restore the last context checkpoint.
-Auto-compaction is enabled by default.
+`/compact threshold <0.3-0.75|auto>`, `/compact keep <tokens|auto>`,
+`/compact buffer <0.1-0.5|auto>`, `/compact stats`, and `/compact rollback`
+to change mode, test automatic compaction, set or reset the adaptive threshold,
+keep size, or buffer, view stats, or restore a checkpoint.
+Auto-compaction is enabled by default. Threshold is adaptive by default (45%,
+range 35-65% based on context growth); use `/compact threshold auto` to reset.
+Buffer and keep size are also adaptive by default (buffer 30%/22%/18% by
+context size, keep ~18% capped at 8k); override with `/compact buffer` and
+`/compact keep`. Token estimation uses a 1.3x safety multiplier. Old tool
+output is pruned outside a 50% recency window. If a provider rejects a
+request because the context is too long, Niyusha compacts once (URich, with
+local compression and legacy fallback) and retries the request once.
 
 ## Understanding the token meters
 
@@ -261,9 +273,10 @@ The sidebar and `/usage` show **two different measurements**:
 - **Context estimate** (`≈used / budget`) is the approximate size of the next
   model input, not the tokens billed over the session. It includes the system
   prompt, tool schemas, active conversation, and the latest DIS-URICH retrieval
-  text when available. Niyusha estimates with characters divided by four; after
-  a provider reports input usage, that count anchors the estimate and later
-  changes are estimated from character deltas. The `≈` is therefore shown
+  text when available. Niyusha estimates with characters divided by four, then
+  applies a 1.3x safety multiplier; after a provider reports input usage, that
+  count anchors the estimate and later changes are estimated from character
+  deltas with the same multiplier. The `≈` is therefore shown
   consistently. Provider tokenizers, transient image input, and prompt changes
   can make the actual next request differ. `/usage` may also show the latest
   provider-reported input count separately.
@@ -279,10 +292,11 @@ The sidebar and `/usage` show **two different measurements**:
   `in`. Cache pricing varies by provider.
 - **Window** is the model's nominal context window. **Budget** is Niyusha's
   smaller working limit when applicable. When automatic compaction is enabled
-  and the mode is not `off`, the sidebar shows its early-check threshold at
-  about 45% of the budget. That early check requires more than eight history
-  messages; the in-run guard can also act above about 70%. Compaction is
-  threshold-driven, not performed on every turn.
+and the mode is not `off`, the sidebar shows its early-check threshold at
+35-65% of the budget (adaptive by context growth). That early check requires
+more than eight history messages; the in-run guard can also act above the
+buffer ceiling (about 70%/78%/82% by context size). Compaction is
+threshold-driven, not performed on every turn.
 - **Trend** is a relative sparkline of distinct context-meter values, not a
   time-scaled chart or billing history. Optional cost is only an estimate from
   built-in public rates; it is not an invoice and may not reflect cache rates,
@@ -305,6 +319,14 @@ versus DIS-URICH savings.
   "compactionMode": "urich",
   "compactionAuto": true,
   "compactionArchiveBeforeCompact": true,
+  "compactionThreshold": 0.45,
+  "compactionThresholdLocked": false,
+  "compactionKeepTokens": 0,
+  "compactionBufferRatio": 0,
+  "compactionCooldownMs": 60000,
+  "contextRecencyPruneRatio": 0.5,
+  "compactionAiTimeoutMs": 30000,
+  "compactionAiChunkChars": 24000,
   "contextEngineMemoryChars": 1400,
   "permissions": {
     "shell": "ask",
@@ -468,34 +490,6 @@ npm view niyusha version # confirm it's live
 
 *Small on disk. Serious about getting work done.*
 
----
-
-## What's new in v0.2.9
-
-This one is about **seeing more and spending less**.
-
-**A sharper interface**
-- Redesigned reasoning panel that reads like a live thought stream instead of a box.
-- Tables that wrap cleanly instead of slicing words, with quieter borders and headers.
-- Cleaner user bubbles, a tighter input area, and a live context meter in the footer.
-- **Zen mode** — `/zen` (or `Ctrl+Z`) strips the chrome so only you and the work remain.
-
-**Token usage visibility**
-- `/usage` reports cumulative input/output token counts separately from the live context estimate.
-- Cache read/write tokens are tracked on every request.
-- Optional cost uses published-rate estimates and shows `n/a` when a provider has no known rate.
-
-**Lean by default**
-- A context guard prunes stale tool output and compacts memory *before* the window overflows.
-- Compaction never splits a tool call from its result, so the history stays valid.
-- Long sessions keep going instead of stalling at the limit.
-
-**Undo that won't eat your disk**
-- Shell snapshots are **content-addressed**: each file version is stored once and reused, so a command only costs the bytes it actually changes.
-- Large files are skipped with an explicit **partial undo** notice, and restoring never deletes files Niyusha didn't create.
-- Undo history is isolated per workspace — switching projects can no longer erase another project's snapshots.
-- `/undo` and `/redo` also update the agent's context, so it never assumes a rolled-back edit is still live.
-
 ## What's new in v0.3.4
 
 This one is about **deciding less, verifying more**, and keeping context cheap.
@@ -604,6 +598,10 @@ This update improves context transparency, compaction recall, and token usage
 clarity.
 
 **Compaction surfacing**
+- Auto-compaction and manual `/compact` are no longer silent: the full compaction
+  result (preserved summary, mode, trigger, token delta) is shown in chat as a
+  special system message (`compaction: true`) in the user's language, so it is
+  never classified as ordinary conversation or added to the provider payload.
 - Auto-compaction is no longer silent: a notice is shown after each successful
   compaction, and the sidebar reports trigger source and total count.
 - Session tokens (cumulative, including compaction/sub-agent calls) are clearly
@@ -622,6 +620,31 @@ clarity.
 - Added `document-conversion` skill (text↔Word, Word↔PDF, JPEG↔PDF, PDF↔JPEG)
   via optional system tools (pandoc/libreoffice/ImageMagick), with permission
   prompts before any installation. Zero runtime dependencies preserved.
+
+## What's new in v0.3.9
+
+This update starts with a strict-provider compatibility fix for Groq and Mistral that reject the extra `createdAt` field, then continues with hardening and improvements to the DIS-URICH system from this session.
+
+**Strict provider compatibility**
+- Sanitized provider messages to strip unsupported metadata such as `createdAt`, so strict providers like Groq and Mistral no longer reject requests with HTTP 422 `extra_forbidden`.
+
+**DIS-URICH hardening & improvements**
+- Preserved chronological ordering across compactions by merging prior atoms, offsetting sequences, and avoiding re-ingestion of prior summaries.
+- Added AI-assisted semantic atomization with confidence, explicit supersedes/conflict handling, semantic dedup, and provenance/archive references.
+- Applied DIS-URICH audit fixes: atom type registry, classification fallback, relation source schema, `maxChars` enforcement, and invariant overflow policy.
+
+- Added multilingual semantic atomization: AI handles mixed-language input while preserving the original language in atom content, without translation.
+
+**Compaction & context (this session)**
+- Adaptive auto-compaction threshold (35-65%) based on per-turn context growth, with 60s cooldown, hysteresis, and post-prune.
+- 1.3x safety multiplier on token estimates.
+- Recency pruning of old tool output outside a 50% budget window.
+- Buffer and keep size adaptive by context size, overridable via `/compact buffer` and `/compact keep`.
+- Prompt overflow guard (90%) and overflow recovery (compact + single retry) with local compression and legacy fallback.
+- Live compaction progress (phase, chunk, elapsed) and typed summary output in chat.
+- `/compact threshold <0.3-0.75 | auto>` command.
+
+Additional fixes may be added later to this section.
 
 ## What NTVGraph Is Building
 
