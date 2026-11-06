@@ -1,0 +1,28 @@
+<!-- footer.html · multi-kolom + baris bawah. Sisipkan credit di .foot-bottom bila /credit ON. -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#"><span class="mark" aria-hidden="true"></span> NamaBrand</a>
+        <p class="tag">Agen coding AI yang hidup di terminal Anda.</p>
+      </div>
+      <div><h4>Produk</h4><a href="#fitur">Fitur</a><a href="#cara">Cara kerja</a><a href="#mulai">Mulai</a></div>
+      <div><h4>Sumber daya</h4><a href="#">Dokumentasi</a><a href="#">Panduan</a><a href="#">Changelog</a></div>
+      <div><h4>Perusahaan</h4><a href="#">Tentang</a><a href="#">Kontak</a><a href="#">Lisensi</a></div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 NamaPerusahaan</span>
+      <!-- Credit footer HANYA bila /credit aktif: <span>Made with NTVGraph × Niyusha</span> -->
+    </div>
+  </div>
+</footer>
+<style>
+  footer { border-top: 1px solid var(--line); padding: var(--sp-xl) 0 var(--sp-lg); }
+  .foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: var(--sp-lg); }
+  .foot-grid h4 { font-size: 13px; font-family: var(--mono); color: var(--ink-muted); text-transform: uppercase; letter-spacing: .06em; margin: 0 0 var(--sp-sm); }
+  .foot-grid a { display: block; color: var(--ink-muted); font-size: 14.5px; padding: 4px 0; transition: color var(--dur); }
+  .foot-grid a:hover { color: var(--ink); }
+  .foot-grid .tag { color: var(--ink-muted); margin-top: var(--sp-sm); max-width: 34ch; font-size: 14.5px; }
+  .foot-bottom { display: flex; justify-content: space-between; align-items: center; gap: var(--sp-md); margin-top: var(--sp-xl); padding-top: var(--sp-md); border-top: 1px solid var(--line); color: var(--ink-muted); font-size: 13.5px; flex-wrap: wrap; }
+  @media (max-width: 800px) { .foot-grid { grid-template-columns: 1fr 1fr; } }
+</style>

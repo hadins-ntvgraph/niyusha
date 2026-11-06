@@ -1,0 +1,10 @@
+{
+  "id": "debugging",
+  "name": "debugging-investigation",
+  "description": "Menyelidiki bug/crash/error: reproduce, bisect, baca error, fix bervariasi.",
+  "triggers": ["bug", "error", "crash", "gagal", "tidak berfungsi", "tak jalan", "exception", "stacktrace", "stack trace", "log error", "kenapa tidak", "keliru", "aneh"],
+  "priority": 90,
+  "token_budget": 1200,
+  "file": "rules.md",
+  "enabled": true
+}

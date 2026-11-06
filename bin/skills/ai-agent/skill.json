@@ -1,0 +1,10 @@
+{
+  "id": "ai-agent",
+  "name": "ai-agent-engineering",
+  "description": "Bangun AI agent/LLM: kontrak, tool calling, RAG, evaluasi terukur.",
+  "triggers": ["ai agent", "llm", "prompt engineering", "tool calling", "function calling", "rag", "embedding", "retrieval", "llm api", "agent loop"],
+  "priority": 72,
+  "token_budget": 1300,
+  "file": "rules.md",
+  "enabled": true
+}

@@ -1,0 +1,10 @@
+{
+  "id": "code-review",
+  "name": "code-review",
+  "description": "Meninjau kode: kebenaran, keamanan, performa, keterbacaan — temuan yang bisa ditindak.",
+  "triggers": ["review kode", "code review", "audit kode", "periksa kode", "peer review", "tinjau kode", "kode ini aman"],
+  "priority": 78,
+  "token_budget": 1200,
+  "file": "rules.md",
+  "enabled": true
+}

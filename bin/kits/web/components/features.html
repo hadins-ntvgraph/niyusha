@@ -1,0 +1,31 @@
+<!-- features.html · grid 3 kolom, kartu dengan ikon SVG (tanpa emoji) -->
+<section id="fitur" class="wrap">
+  <div class="sec-head">
+    <span class="eyebrow">Kemampuan</span>
+    <h2>Semua yang Anda butuhkan, tanpa bobot berlebih.</h2>
+    <p>Dirancang untuk kecepatan dan keselamatan kerja di mesin nyata.</p>
+  </div>
+  <div class="grid">
+    <article class="card">
+      <div class="ic" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg></div>
+      <h3>Edit ter-staging</h3>
+      <p>Tiap perubahan masuk overlay virtual; tinjau diff sebelum menyentuh disk.</p>
+    </article>
+    <!-- ulangi .card untuk tiap fitur (3–6), ganti ikon SVG + judul + deskripsi -->
+  </div>
+</section>
+<style>
+  section { padding: var(--sp-2xl) 0; }
+  .sec-head { max-width: 60ch; margin-bottom: var(--sp-xl); }
+  .eyebrow { color: var(--accent); font-family: var(--mono); font-size: 12.5px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: var(--sp-sm); display: block; }
+  .sec-head h2 { font-size: clamp(28px, 4vw, 42px); letter-spacing: -0.03em; }
+  .sec-head p { color: var(--ink-muted); margin-top: var(--sp-sm); font-size: 17px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-md); }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 620px) { .grid { grid-template-columns: 1fr; } }
+  .card { border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface); padding: var(--sp-lg); transition: transform var(--dur) var(--ease), border-color var(--dur); }
+  .card:hover { transform: translateY(-2px); border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+  .card .ic { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 12px; background: var(--surface-2); color: var(--accent); margin-bottom: var(--sp-md); }
+  .card h3 { font-size: 18px; letter-spacing: -0.01em; }
+  .card p { color: var(--ink-muted); margin-top: var(--sp-xs); font-size: 15px; }
+</style>

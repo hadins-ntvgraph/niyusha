@@ -1,0 +1,10 @@
+{
+  "id": "simulation",
+  "name": "simulation-harness",
+  "description": "Simulasi app/software/browser/Android (bukan cuma game) + bukti.",
+  "triggers": ["simulasi", "simulation", "uji ui", "browser", "aplikasi", "software", "regression", "headless", "screenshot", "adb", "emulator", "game canvas", "layout"],
+  "priority": 76,
+  "token_budget": 3600,
+  "file": "rules.md",
+  "enabled": true
+}

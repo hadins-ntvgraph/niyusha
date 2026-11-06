@@ -1,0 +1,10 @@
+{
+  "id": "refactor",
+  "name": "refactoring-engineering",
+  "description": "Merapikan/mengubah struktur kode tanpa mengubah perilaku, langkah kecil aman.",
+  "triggers": ["refactor", "rapikan kode", "clean code", "pisahkan", "modular", "tulis ulang", "sederhanakan", "kode berantakan"],
+  "priority": 75,
+  "token_budget": 1200,
+  "file": "rules.md",
+  "enabled": true
+}

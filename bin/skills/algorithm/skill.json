@@ -1,0 +1,10 @@
+{
+  "id": "algorithm",
+  "name": "algorithm-system-design",
+  "description": "Algoritma/struktur data & system design: kompleksitas, edge, trade-off.",
+  "triggers": ["algoritma", "algorithm", "kompleksitas", "big-o", "struktur data", "data structure", "system design", "arsitektur sistem", "skalabilitas", "throughput", "trade-off"],
+  "priority": 74,
+  "token_budget": 1300,
+  "file": "rules.md",
+  "enabled": true
+}

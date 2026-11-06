@@ -1,0 +1,88 @@
+{
+  "name": "niyusha",
+  "version": "0.3.9",
+  "description": "AI coding agent for the terminal: staged file edits with diff review, permissioned shell, web search, autonomous mode, sessions, and an MCP client. Zero runtime dependencies.",
+  "license": "MIT",
+  "author": "Hadins (NTVGraph)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hadins-ntvgraph/niyusha.git"
+  },
+  "homepage": "https://github.com/hadins-ntvgraph/niyusha#readme",
+  "bugs": {
+    "url": "https://github.com/hadins-ntvgraph/niyusha/issues"
+  },
+  "keywords": [
+    "ai",
+    "ai-agent",
+    "agent",
+    "coding-agent",
+    "cli",
+    "tui",
+    "terminal",
+    "llm",
+    "openai",
+    "mcp",
+    "developer-tools",
+    "nodejs"
+  ],
+  "bin": {
+    "niyusha": "bin/niyusha.js"
+  },
+  "files": [
+    "bin/",
+    "ntv_link_parser.py",
+    "ntv_img_ocr.py",
+    "VISUAL_CONTEXT.md",
+    "DIS-URICH.md"
+  ],
+  "scripts": {
+    "start": "node bin/niyusha.js",
+    "niyusha": "node bin/niyusha.js",
+    "test": "node scripts/test-skills.js && node scripts/test-save-skill.js && node scripts/test-history.js && node scripts/test-e2e.js && node scripts/test-subagent.js && node scripts/test-todo.js && node scripts/test-image.js && node scripts/test-image-tools.js && node scripts/test-document-reader.js && node scripts/test-settings-language.js && node scripts/test-mcp.js && node scripts/test-update.js && node scripts/test-usage.js && node scripts/test-edit.js && node scripts/test-continue.js && node scripts/test-hardening.js && node scripts/test-compaction.js && node scripts/quality-context.js --self-test && node scripts/test-context-engine.js && node scripts/test-relation-precision.js && node scripts/test-v039-contract.js && node scripts/test-diagnose-context.js && node scripts/test-state.js && node scripts/quality-context-offline.js && node scripts/test-sim.js && node scripts/test-undo.js && node scripts/test-shell-undo.js",
+    "test:subagent": "node scripts/test-subagent.js",
+    "test:todo": "node scripts/test-todo.js",
+    "test:image": "node scripts/test-image.js && node scripts/test-image-tools.js",
+    "test:mcp": "node scripts/test-mcp.js",
+    "test:update": "node scripts/test-update.js",
+    "test:usage": "node scripts/test-usage.js",
+    "test:edit": "node scripts/test-edit.js",
+    "test:continue": "node scripts/test-continue.js",
+    "test:hardening": "node scripts/test-hardening.js",
+    "test:compaction": "node scripts/test-compaction.js",
+    "test:quality-context": "node scripts/quality-context.js --self-test",
+    "test:context": "node scripts/test-context-engine.js",
+    "test:parity": "node scripts/test-urich-parity.js",
+
+    "test:relation-precision": "node scripts/test-relation-precision.js",
+    "test:v039-contract": "node scripts/test-v039-contract.js",
+    "test:state": "node scripts/test-state.js",
+    "test:save-skill": "node scripts/test-save-skill.js",
+    "test:sim": "node scripts/test-sim.js",
+    "test:undo": "node scripts/test-undo.js",
+    "e2e:web": "node scripts/e2e-web.js",
+    "bench": "node scripts/bench.js",
+    "bench:context": "node scripts/bench-context.js",
+    "quality:context": "node scripts/quality-context.js",
+    "quality:offline": "node scripts/quality-context-offline.js",
+    "diagnose:context": "node scripts/diagnose-context-bloat.js",
+    "audit:relations": "node scripts/audit-relation-graph.js",
+    "bench:list": "node scripts/bench.js --list",
+    "bench:baseline": "node scripts/bench.js --baseline",
+    "token": "node scripts/token-budget.js",
+    "prepublishOnly": "node scripts/token-budget.js",
+    "lint": "npx eslint bin/ scripts/",
+    "lint:fix": "npx eslint bin/ scripts/ --fix",
+    "quality": "node scripts/code-quality.js",
+    "format": "npx prettier --write bin/ scripts/",
+    "format:check": "npx prettier --check bin/ scripts/",
+    "docs": "npx jsdoc -c jsdoc.json"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "electron": "^45.0.0",
+    "eslint": "^8.0.0"
+  }
+}

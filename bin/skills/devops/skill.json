@@ -1,0 +1,10 @@
+{
+  "id": "devops",
+  "name": "devops-engineering",
+  "description": "DevOps/infra: env & secret, setup reproducible, nginx/proses, observability.",
+  "triggers": ["devops", "nginx", "systemd", "pm2", "environment", "env var", "infra", "server config", "monitoring", "observability", "deployment server", "reverse proxy"],
+  "priority": 70,
+  "token_budget": 1300,
+  "file": "rules.md",
+  "enabled": true
+}

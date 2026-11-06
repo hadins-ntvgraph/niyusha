@@ -1,0 +1,10 @@
+{
+  "id": "automation",
+  "name": "automation-engineering",
+  "description": "Otomasi & workflow: script, cron, pipeline, idempotent, log & error handling.",
+  "triggers": ["otomasi", "automation", "workflow", "cron", "schedule", "batch", "script otomatis", "otomatiskan", "webhook script"],
+  "priority": 70,
+  "token_budget": 1200,
+  "file": "rules.md",
+  "enabled": true
+}

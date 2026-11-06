@@ -1,0 +1,10 @@
+{
+  "id": "ui-ux",
+  "name": "ui-ux-design",
+  "description": "Desain UI/UX: alur, hierarki, design system, state, aksesibilitas.",
+  "triggers": ["ui", "ux", "desain antarmuka", "design system", "wireframe", "user flow", "prototyping", "user experience", "usability"],
+  "priority": 72,
+  "token_budget": 1300,
+  "file": "rules.md",
+  "enabled": true
+}

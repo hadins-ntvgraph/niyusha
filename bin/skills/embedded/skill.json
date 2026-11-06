@@ -1,0 +1,10 @@
+{
+  "id": "embedded",
+  "name": "embedded-systems",
+  "description": "Embedded/IoT: board & batasan, loop non-blocking, pinout, uji per modul.",
+  "triggers": ["arduino", "esp32", "esp8266", "raspberry pi", "mikrokontroler", "microcontroller", "firmware", "gpio", "i2c", "spi", "pwm", "rtos"],
+  "priority": 66,
+  "token_budget": 1300,
+  "file": "rules.md",
+  "enabled": true
+}

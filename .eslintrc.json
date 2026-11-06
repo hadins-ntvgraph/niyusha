@@ -1,0 +1,23 @@
+{
+  "env": {
+    "node": true,
+    "es2021": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "commonjs"
+  },
+  "rules": {
+    "no-unused-vars": "warn",
+    "no-console": "off",
+    "semi": ["error", "always"],
+    "quotes": ["warn", "single"],
+    "indent": ["warn", 2],
+    "no-trailing-spaces": "warn",
+    "eol-last": "warn",
+    "no-empty": ["error", { "allowEmptyCatch": true }],
+    "no-control-regex": "off"
+  },
+  "ignorePatterns": ["node_modules/", "dist/", "*.min.js"]
+}

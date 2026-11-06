@@ -1,0 +1,10 @@
+{
+  "id": "web",
+  "name": "web-development",
+  "description": "Situs web statis: struktur, CSS zero-dep (tokens), responsif, a11y — pakai bersama kit 'niyusha-web-kit' untuk tokens/gaya.",
+  "triggers": ["website", "web", "situs", "landing", "halaman web", "homepage", "html", "css", "frontend", "beranda", "mockup"],
+  "priority": 80,
+  "token_budget": 3200,
+  "file": "rules.md",
+  "enabled": true
+}

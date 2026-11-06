@@ -1,0 +1,10 @@
+{
+  "id": "image-ocr",
+  "name": "image-ocr",
+  "description": "OCR teks dari gambar/gambar berita: tool image_ocr (tesseract) untuk single image, script ntv_img_ocr.py untuk koleksi gambar dari halaman berita.",
+  "triggers": ["ocr", "image to text", "gambar", "foto", "screenshot", "gambar berita", "extract text from image", "image ocr", "vision ocr"],
+  "priority": 60,
+  "token_budget": 1200,
+  "file": "rules.md",
+  "enabled": true
+}

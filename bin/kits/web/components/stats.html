@@ -1,0 +1,14 @@
+<!-- stats.html · pita angka (bukti sosial) di antara border -->
+<div class="wrap"><div class="stats">
+  <div class="stat"><b>0</b><span>dependency runtime</span></div>
+  <div class="stat"><b>~400 KB</b><span>ukuran paket</span></div>
+  <div class="stat"><b>22</b><span>tool bawaan</span></div>
+  <div class="stat"><b>20+</b><span>provider model</span></div>
+</div></div>
+<style>
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-md);
+    padding: var(--sp-xl) 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .stat b { display: block; font-size: clamp(26px, 3.4vw, 40px); letter-spacing: -0.03em; }
+  .stat span { color: var(--ink-muted); font-size: 14px; }
+  @media (max-width: 700px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+</style>

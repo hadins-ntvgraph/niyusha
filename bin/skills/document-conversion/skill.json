@@ -1,0 +1,10 @@
+{
+  "id": "document-conversion",
+  "name": "document-conversion",
+  "description": "Konversi format dokumen/gambar (teks↔Word, Word↔PDF, JPEG↔PDF, PDF↔JPEG) via tools sistem opsional. Minta izin sebelum instalasi.",
+  "triggers": ["convert", "konversi", "to pdf", "to word", "to docx", "to jpeg", "to jpg", "ubah ke", "jadikan pdf", "jadikan word", "ekspor pdf", "export pdf", "menjadi pdf", "menjadi word"],
+  "priority": 70,
+  "token_budget": 1200,
+  "file": "rules.md",
+  "enabled": true
+}

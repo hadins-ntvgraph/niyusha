@@ -1,0 +1,10 @@
+{
+  "id": "backend",
+  "name": "backend-engineering",
+  "description": "API/server/backend: desain endpoint, validasi, error handling, auth, test.",
+  "triggers": ["backend", "endpoint", "server", "rest", "graphql", "webhook", "microservice", "mikroservis", "api service"],
+  "priority": 76,
+  "token_budget": 1300,
+  "file": "rules.md",
+  "enabled": true
+}

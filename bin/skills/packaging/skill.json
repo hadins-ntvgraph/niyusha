@@ -1,0 +1,10 @@
+{
+  "id": "packaging",
+  "name": "packaging-build-release",
+  "description": "Membuat artefak rilis: APK (Gradle), EXE (PyInstaller/Electron/pkg), bundel, versi & lockfile.",
+  "triggers": ["apk", "aab", "exe", "installer", "packaging", "build release", "bundle", "installer", "pyinstaller", "electron", "bundle apk", "build exe", "distribusi"],
+  "priority": 68,
+  "token_budget": 1300,
+  "file": "rules.md",
+  "enabled": true
+}

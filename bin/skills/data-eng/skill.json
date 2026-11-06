@@ -1,0 +1,10 @@
+{
+  "id": "data-eng",
+  "name": "data-engineering",
+  "description": "Pipeline data/ETL: idempotent, kualitas data, skala, lineage.",
+  "triggers": ["etl", "elt", "data pipeline", "pipeline data", "data warehouse", "airflow", "kafka", "ingestion", "data lake", "dbt", "big data", "data quality", "schema data"],
+  "priority": 70,
+  "token_budget": 1300,
+  "file": "rules.md",
+  "enabled": true
+}

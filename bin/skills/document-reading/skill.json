@@ -1,0 +1,10 @@
+{
+  "id": "document-reading",
+  "name": "document-reading",
+  "description": "Baca PDF, Word, dan Excel dengan ekstraksi lokal terarah melalui read_document.",
+  "triggers": ["pdf", "docx", "word document", "dokumen word", "xlsx", "excel", "spreadsheet", "lembar kerja", "baca dokumen", "read document"],
+  "priority": 78,
+  "token_budget": 1500,
+  "file": "rules.md",
+  "enabled": true
+}

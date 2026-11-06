@@ -1,0 +1,10 @@
+{
+  "id": "database",
+  "name": "database-engineering",
+  "description": "DB & SQL: schema, query, index, migration, N+1, keamanan data.",
+  "triggers": ["database", "db", "sql", "query", "schema", "migration", "mysql", "postgres", "mongodb", "redis", "indeks", "n+1"],
+  "priority": 70,
+  "token_budget": 1200,
+  "file": "rules.md",
+  "enabled": true
+}

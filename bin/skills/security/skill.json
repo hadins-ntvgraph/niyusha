@@ -1,0 +1,10 @@
+{
+  "id": "security",
+  "name": "security-review",
+  "description": "Audit keamanan: input validation, XSS/SQLi, secret, auth, dependensi.",
+  "triggers": ["security", "keamanan", "vulnerability", "xss", "sqli", "sql injection", "auth bypass", "secret", "token bocor", "audit keamanan", "review kode", "periksa keamanan", "aman tidak"],
+  "priority": 78,
+  "token_budget": 1200,
+  "file": "rules.md",
+  "enabled": true
+}

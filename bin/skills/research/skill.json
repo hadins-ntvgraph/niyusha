@@ -1,0 +1,10 @@
+{
+  "id": "research",
+  "name": "technical-research",
+  "description": "Riset teknis: sumber primer, cross-check, kutip tautan, ringkas + rekomendasi.",
+  "triggers": ["riset", "research", "studi literatur", "referensi", "sitasi", "paper", "bandingkan opsi", "cari info terbaru", "sumber terpercaya"],
+  "priority": 66,
+  "token_budget": 1200,
+  "file": "rules.md",
+  "enabled": true
+}

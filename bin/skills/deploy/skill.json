@@ -1,0 +1,10 @@
+{
+  "id": "deploy",
+  "name": "deployment-release",
+  "description": "Build/publish/CI/CD/Docker: artefak bersih, uji dulu, rollback aman.",
+  "triggers": ["deploy", "publish", "rilis", "release", "ci/cd", "docker", "npm publish", "build production", "artefak", "paket rilis"],
+  "priority": 70,
+  "token_budget": 1200,
+  "file": "rules.md",
+  "enabled": true
+}

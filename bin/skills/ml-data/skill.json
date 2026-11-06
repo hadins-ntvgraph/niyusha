@@ -1,0 +1,10 @@
+{
+  "id": "ml-data",
+  "name": "data-science-ml",
+  "description": "Data science & ML: EDA, preprocessing, model, train/eval, hasil terukur.",
+  "triggers": ["machine learning", "data science", "pandas", "numpy", "dataset", "training", "model", "eda", "regresi", "klasifikasi", "csv", "sklearn", "tensorflow", "pytorch"],
+  "priority": 70,
+  "token_budget": 1300,
+  "file": "rules.md",
+  "enabled": true
+}

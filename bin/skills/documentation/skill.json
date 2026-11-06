@@ -1,0 +1,10 @@
+{
+  "id": "documentation",
+  "name": "documentation-engineering",
+  "description": "Menulis dokumentasi: README, API docs, panduan — akurat & contoh yang jalan.",
+  "triggers": ["dokumentasi", "documentation", "readme", "docstring", "api docs", "panduan", "changelog", "komentar kode"],
+  "priority": 68,
+  "token_budget": 1200,
+  "file": "rules.md",
+  "enabled": true
+}

@@ -1,0 +1,10 @@
+{
+  "id": "game",
+  "name": "game-development",
+  "description": "Game dev: game loop, state, physics/input, performa frame, karakter berbentuk representatif.",
+  "triggers": ["game", "gamedev", "canvas", "three.js", "godot", "unity", "sprite", "game loop", "2d game", "3d game", "character"],
+  "priority": 68,
+  "token_budget": 1300,
+  "file": "rules.md",
+  "enabled": true
+}

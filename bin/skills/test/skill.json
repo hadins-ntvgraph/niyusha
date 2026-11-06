@@ -1,0 +1,10 @@
+{
+  "id": "test",
+  "name": "test-engineering",
+  "description": "Menulis/menjalankan test: ikut framework, kasus penting, verifikasi coverage.",
+  "triggers": ["test", "unit test", "jest", "pytest", "vitest", "coverage", "test case", "spec", "bikin test", "tambahkan test"],
+  "priority": 72,
+  "token_budget": 1200,
+  "file": "rules.md",
+  "enabled": true
+}

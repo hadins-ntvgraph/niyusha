@@ -1,0 +1,18 @@
+<!-- cta.html · pita ajakan dengan mesh gradient bergerak halus -->
+<section class="wrap">
+  <div class="cta-band">
+    <h2>Bangun lebih cepat, tanpa bloat.</h2>
+    <p>Ringan, aman, dan sepenuhnya di mesin Anda.</p>
+    <a class="btn btn-primary" href="#">Mulai sekarang</a>
+  </div>
+</section>
+<style>
+  .cta-band { position: relative; border-radius: var(--r-lg); padding: clamp(36px, 6vw, 72px);
+    text-align: center; overflow: hidden; border: 1px solid var(--line); background: var(--surface); }
+  .cta-band::before { content: ""; position: absolute; inset: -40%; background: var(--grad); opacity: .35; z-index: 0; animation: drift 18s ease-in-out infinite alternate; }
+  .cta-band > * { position: relative; z-index: 1; }
+  .cta-band h2 { font-size: clamp(28px, 4.6vw, 46px); letter-spacing: -0.03em; }
+  .cta-band p { color: var(--ink-muted); margin: var(--sp-sm) 0 var(--sp-lg); }
+  @keyframes drift { from { transform: translate3d(-4%, -2%, 0) scale(1); } to { transform: translate3d(4%, 2%, 0) scale(1.1); } }
+  @media (prefers-reduced-motion: reduce) { .cta-band::before { animation: none; } }
+</style>

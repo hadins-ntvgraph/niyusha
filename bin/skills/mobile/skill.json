@@ -1,0 +1,10 @@
+{
+  "id": "mobile",
+  "name": "mobile-app-development",
+  "description": "Aplikasi mobile (React Native/Flutter/Android): build, dependency, run, praktik native.",
+  "triggers": ["android", "apk", "mobile", "react native", "flutter", "kotlin", "java android", "ios", "gradle", "device", "emulator"],
+  "priority": 72,
+  "token_budget": 1300,
+  "file": "rules.md",
+  "enabled": true
+}

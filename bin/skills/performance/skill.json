@@ -1,0 +1,10 @@
+{
+  "id": "performance",
+  "name": "performance-optimization",
+  "description": "Optimasi performa: ukur dulu, cari bottleneck, angka before/after.",
+  "triggers": ["lambat", "lemot", "optimasi", "optimalkan", "performance", "slow", "bottleneck", "profil", "profiling", "memory leak", "boros memori", "latensi", "lag"],
+  "priority": 74,
+  "token_budget": 1300,
+  "file": "rules.md",
+  "enabled": true
+}

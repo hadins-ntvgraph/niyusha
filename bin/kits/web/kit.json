@@ -1,0 +1,22 @@
+{
+  "name": "niyusha-web-kit",
+  "version": "2.0.0",
+  "description": "Kit website modern khas Niyusha — original MIT, zero-dep, premium & rapi",
+  "license": "MIT",
+  "zero_dep": true,
+  "cdn_allowed": false,
+  "fonts": "System + Geist (fallback Inter) - no external CDN, self-contained via system stack",
+  "signature_components": {
+    "nav": "sticky glass blur, brand mark conic-gradient, CTA pill",
+    "hero": "headline fluid clamp + 1 kata gradien, chip dot status, 2 CTA, visual bento/glass",
+    "features": "bento asimetris (span), kartu glass, ikon garis 24px, hover lift",
+    "stats": "pita angka di antara border",
+    "cta": "pita ajakan aurora drift halus",
+    "footer": "multi-kolom + baris bawah (credit opsional via /credit)",
+    "background": "aurora (mesh) + grain overlay"
+  },
+  "templates": [
+    "landing-saas.html"
+  ],
+  "rules": "Standar modern WAJIB: struktur lengkap nav→hero→fitur→stats→cara→CTA→footer; tipografi fluid clamp; copy domain NYATA tanpa label meta/dev maupun placeholder; ikon garis 24px DARI DAFTAR (jangan karang path); wajib visual; responsif; dark/light; a11y AA; konsisten antar-halaman (nav/footer/brand/warna). Semua pakai tokens.json (CSS var), zero-dep. Aksen mono // maks 1-2x. Credit footer hanya bila cfg().credit."
+}

@@ -1,0 +1,23 @@
+<!-- nav.html · header sticky + blur · zero-dep (pakai CSS var kit) -->
+<header class="nav-wrap">
+  <nav class="nav wrap" aria-label="Utama">
+    <a class="brand" href="#"><span class="mark" aria-hidden="true"></span> NamaBrand</a>
+    <div class="nav-links">
+      <a href="#fitur">Fitur</a>
+      <a href="#cara">Cara kerja</a>
+      <a href="#docs">Dokumentasi</a>
+    </div>
+    <a class="btn btn-primary" href="#mulai">Mulai pakai</a>
+  </nav>
+</header>
+<style>
+  .nav-wrap { position: sticky; top: 0; z-index: 20; backdrop-filter: blur(12px);
+    background: color-mix(in srgb, var(--bg) 78%, transparent); border-bottom: 1px solid var(--line); }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: var(--sp-sm) 0; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -0.02em; }
+  .brand .mark { width: 22px; height: 22px; border-radius: 6px; background: var(--grad); box-shadow: var(--glow); }
+  .nav-links { display: flex; gap: var(--sp-lg); }
+  .nav-links a { color: var(--ink-muted); font-size: 15px; transition: color var(--dur); }
+  .nav-links a:hover { color: var(--ink); }
+  @media (max-width: 760px) { .nav-links { display: none; } }
+</style>

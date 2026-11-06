@@ -1,0 +1,10 @@
+{
+  "id": "image-embed",
+  "name": "image-embed",
+  "description": "Simpan sidik jari vector gambar lokal via image_embed; bukan pemahaman visual semantik.",
+  "triggers": ["image to vector", "embedding gambar", "vector gambar", "image embed", "embed gambar", "image vector"],
+  "priority": 55,
+  "token_budget": 1200,
+  "file": "rules.md",
+  "enabled": true
+}

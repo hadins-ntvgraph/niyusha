@@ -1,0 +1,10 @@
+{
+  "id": "frontend",
+  "name": "frontend-engineering",
+  "description": "Kode UI frontend (React/Vue/TS): state, styling, a11y, performa, verifikasi.",
+  "triggers": ["frontend", "react", "vue", "svelte", "typescript", "komponen", "state management", "styling", "interaksi ui"],
+  "priority": 76,
+  "token_budget": 1300,
+  "file": "rules.md",
+  "enabled": true
+}
